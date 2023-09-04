@@ -1,0 +1,252 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background: #eff2f6;
+}
+.top_nav{
+    background: none;
+    display: flex;
+    margin: ;
+    justify-content: space-between;
+}
+.logo{
+    margin-right: 30px;
+    margin-top: 30px;
+}
+.logo img{
+    width: 20ex;
+}
+.top_nav .nav_img img{
+    margin-left: 30px;
+    margin-top: 20px;
+    width: 40px;
+}
+.box_container{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-top: -10px;
+}
+.match_con{
+    width: 90%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 20px;
+    margin-top: 25px;
+}
+.match_content{
+    margin: 15px;
+    width: 100%;    
+}
+.comp{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.status{
+    text-align: center;
+    font-family: futura;
+    margin-left: 105px;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 3px;
+    color: red;
+}
+.comp img{
+    width: 25px;
+}
+.comp_det{
+    display: flex;
+}
+.comp p{
+    font-family: futura;
+    margin-left: 105px;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 3px;
+}
+.teams{
+    display: flex;    
+    margin-top: 20px;
+    justify-content: space-between;
+}
+.homeTeam{
+    
+}
+.homeTeam p{
+    text-align: center;
+    font-family: futura;
+    margin-left: 105px;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 3px;
+}
+.homeTeam .crest img{
+    width: 110px;
+    height: auto;
+}
+.awayTeam{
+    
+}
+.awayTeam p{
+    text-align: center;
+    font-family: futura;
+    margin-left: 105px;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 3px;
+}
+.awayTeam .crest img{
+    width: 110px;
+    height: auto;
+}
+.detail_btn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+.detail_btn button{
+    width: 90%;
+    height: 40px;
+    border: none;
+    color: white;
+    font-family: futura;    
+    background: #003366;
+    font-size: 14px;
+    font-weight: 400;    
+    border-radius: 6px;
+}
+.detail_btn form{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.date{
+    margin-top: 60px;
+    text-align: center;
+}
+.date p{
+    font-family: futura;
+    margin-left: 105px;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 3px;
+}
+.menu_bar{
+    width: 100%;
+    height: 100%;
+    background: white;
+    position: fixed;
+    top: 0;
+    margin-left: -100%;
+    transition: 0.9s;
+}
+.menu_bar .logo{
+    margin-left: 10px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;    
+}
+.menu_bar .logo img{
+    width: 20ex;    
+}
+.menu_items{
+    display: flex;
+    margin-left: 10px;
+}
+.menu_items a{
+    text-decoration: none;
+    font-family: futura;
+    font-weight: 500;
+    font-size: 16px;
+    color: #003366;
+}
+.menu_items li{
+    margin-top: 22px;
+    list-style: none;
+    margin-left: 10px;
+}
+.search{
+    width: 100%;
+    margin-top: 20px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.search_con{
+    width: 90%;
+}
+.search_con input{
+    height: 38px;
+    width: 100%;
+    background: #E0F5FF;
+    text-indent: 5px;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+}
+.search button{
+    width: 100%;
+    height: 40px;
+    border: none;
+    color: white;
+    font-family: futura;    
+    background: #003366;
+    font-size: 14px;
+    font-weight: 400;    
+    border-radius: 6px;
+    margin-top: 8px;
+}
+.close_menu button{
+    background: #003366;
+    width: 30px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    height: 30px;
+    border-radius: 10px;
+}
+.footer{
+    justify-content: center;
+    display: flex;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    align-items: center;
+}
+.footer img{
+    width: 300px;
+}
+.footer p{
+    text-decoration: none;
+    font-family: futura;
+    font-weight: 500;
+    font-size: 16px;
+    color: #003366;
+}
+.reload_bg{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+.reload{
+    background: #003366;
+    height: 50px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    width: 50px;
+    border-radius: 100%;
+}
+.reload img{
+    width: 40px;
+}

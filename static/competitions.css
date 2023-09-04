@@ -1,0 +1,36 @@
+.comp_con{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.comp_box{
+    width: 95%;
+    background: white;
+    border-radius: 15px;    
+}
+.competition{
+    margin-left: 2.5%;
+    background: rgba(173, 216, 230, 0.4);
+    width: 95%;  
+    margin-top: 10px;  
+    display: flex;
+    align-items: center;      
+    border-radius: 10px;
+}
+.comp_det{
+    margin: 20px;
+}
+.competition img{
+    width: 50px;
+}
+.comp_det h2{
+    font-weight: 450;
+    font-size: 18px;
+    font-family: futura;
+    margin-top: 10px;
+    margin-left: 8px;
+}
+form{
+    display: none;
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page title</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='competitions.css')}}">
+    <script src="{{url_for('static',filename='competitions.js')}}"></script>
+    <link rel="stylesheet" href="{{url_for('static',filename='home.css')}}">
+    <script src="{{url_for('static', filename='home.js')}}"></script>
+</head>
+<body>
+    <div class="top_nav">
+        <div class="nav_img">
+            <img src="{{url_for('static',filename='nav.png')}}" alt="" onclick="open_menu()"></img>
+        </div>
+        <div class="logo">
+            <img src="{{url_for('static',filename='logo.png')}}" alt=""></img>
+        </div>
+    </div> 
+       
+    {% set data = data %}
+    <div class="comp_con">
+        <div class="comp_box">
+            {% for get_comp in data %}
+                {% set comp_logo = get_comp['emblem'] %}
+                {% set comp_name = get_comp['name'] %}
+                <form action="{{url_for('competitions')}}" method="POST">
+                        <input type="text" value="{{get_comp["id"]}}" name="comp_id">
+                        <input type="submit" value="submit" id="sub{{get_comp["id"]}}">
+                    </form>
+                    <label for="sub{{get_comp["id"]}}">
+                <div class="competition">                    
+                    <div class="comp_det">                   
+                    <img src="{{comp_logo}}" alt=""></img>
+                    <h2>{{comp_name}}</h2>                    
+                    </div>                                                            
+                </div>
+                </label>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="menu_bar" id="menu">
+       <div class="logo">
+            <img src="{{url_for('static',filename='logo1.png')}}" alt=""></img>
+            <div class="close_menu">
+                <button onclick="close_menu()">×</button>
+            </div>
+        </div> 
+        <div class="menu_items">
+            <div class="menu_links">
+                <ul>
+                <li><a href="{{url_for('home')}}">Home</a></li>
+                <li><a href="{{url_for('livescore')}}">Live Score</a></li>
+                <li><a href="">Video Highlights</a> </li>
+                <li><a href="{{url_for('newspage')}}">Football News</a></li>
+                <li><a href="">Predict Scores</a></li>
+                <li><a href="{{url_for('competitions')}}">Leage Tables</a></li>                
+                <li><a href="">Leagues</a></li>                
+                <li><a href="">Sign Up</a></li> 
+               <li><a href="">About Us</a></li> 
+                </ul>                
+            </div>
+        </div>
+        <div class="search">
+            <div class="search_con">
+                <input type="search" placeholder="Search">                                                              
+                <button>Search</button>                                                                              
+            </div>                          
+        </div>        
+    </div> 
+    
+    <footer>
+        <div class="footer">
+            <img src="{{url_for('static',filename='logo1.png')}}" alt=""></img>                                                           
+        </div>
+    </footer>   
+    <div class="reload_bg" onclick="location.reload()">
+        <div class="reload">
+            <img src="{{url_for('static',filename='reload.png')}}" alt=""></img>               
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page title</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='home.css')}}">
+    <script src="{{url_for('static', filename='home.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>  
+</head>
+<body>
+    <div class="top_nav">
+        <div class="nav_img">
+            <img src="{{url_for('static',filename='nav.png')}}" alt="" onclick="open_menu()"></img>
+        </div>
+        <div class="logo">
+            <img src="{{url_for('static',filename='logo.png')}}" alt=""></img>
+        </div>
+    </div>
+    {% set matches_data = data %}
+    {% set date = dates %}
+    {% set count = 0 %}    
+    {% set time = time_list %}
+    {% for get_match in matches_data %}    
+    <div class="box_container">
+                <div class="match_con">
+           
+            <div class="match_content">
+               <div class="comp">
+                   {% set comp = get_match["competition"]["emblem"]%}
+                   <div class="comp_det">
+                      <img src="{{comp}}" alt=""></img>
+                   <p>{{get_match["competition"]["name"]}}</p> 
+                   </div>
+                   {% set status = get_match["status"] %}
+                   {% if status == "IN_PLAY"%}
+                       <p style="color:red">LIVE</p>                                                
+                   {% endif %}
+                   
+                   {% if status == "FINISHED" %}
+                       <p style="color:green">Full-Time</p>
+                   {% endif %}
+                   
+                   {% if status == "TIMED" %}
+                       <p style="color:BLACK">Coming Soon</p>
+                   {% endif %}
+                   
+                   {% if status == "PAUSED" %}
+                       <p style="color:blue">{{status}}</p>
+                   {% endif %}
+               </div>
+               <div class="teams">
+                {% set homeTeam = get_match["homeTeam"]["tla"]%}
+                {% set homeTeamLogo = get_match["homeTeam"]["crest"]%}
+                {% set awayTeam = get_match["awayTeam"]["tla"]%}     
+                {% set awayTeamLogo = get_match["awayTeam"]["crest"]%}
+                <div class="homeTeam">
+                    <div class="crest">
+                        <img src="{{homeTeamLogo}}" alt=""></img>
+                    </div>
+                     <p>{{homeTeam}}</p>   
+                </div>
+                
+                <div class="date">                    
+                    {% set count = loop.index0 %}
+                    
+                    {% if status == "FINISHED" %}
+                        {% set homeScore = get_match["score"]["fullTime"]["home"] %} 
+                        {% set awayScore = get_match["score"]["fullTime"]["away"] %} 
+                        
+                        <p style="font-size:18px">{{homeScore}} - {{awayScore}}</p>
+                    {% else %}
+                    <p>{{time[count]}}</p>
+                    <p>{{date[count]}}</p>
+                    {% endif %}   
+                </div>                                
+                <div class="awayTeam">
+                    <div class="crest">
+                        <img src="{{awayTeamLogo}}" alt=""></img>
+                    </div>
+                    <p>{{awayTeam}}</p>
+                </div> 
+                </div> 
+                <div class="detail_btn">
+                <form action="/" method="POST">
+                    <input type="text" style="display:none" value="{{get_match}}" name="data">            
+                <button>View Details</button>                           
+                </form>                
+        </div>                 
+            </div>                             
+        </div>                
+    </div>            
+    {% endfor %}     
+    </div>            
+    <div class="menu_bar" id="menu">
+       <div class="logo">
+            <img src="{{url_for('static',filename='logo1.png')}}" alt=""></img>
+            <div class="close_menu">
+                <button onclick="close_menu()">×</button>
+            </div>
+        </div> 
+        <div class="menu_items">
+            <div class="menu_links">
+                <ul>
+                <li><a href="{{url_for('home')}}">Home</a></li>
+                <li><a href="{{url_for('livescore')}}">Live Score</a></li>
+                <li><a href="">Video Highlights</a> </li>
+                <li><a href="{{url_for('newspage')}}">Football News</a></li>
+                <li><a href="">Predict Scores</a></li>
+                <li><a href="{{url_for('competitions')}}">Leage Tables</a></li>                
+                <li><a href="">Leagues</a></li>                
+                <li><a href="">Sign Up</a></li> 
+               <li><a href="">About Us</a></li> 
+                </ul>                
+            </div>
+        </div>
+        <div class="search">
+            <div class="search_con">
+                <input type="search" placeholder="Search">                                                              
+                <button>Search</button>                                                                              
+            </div>                          
+        </div>        
+    </div> 
+    
+    <footer>
+        <div class="footer">
+            <img src="{{url_for('static',filename='logo1.png')}}" alt=""></img>                                                           
+        </div>
+    </footer>   
+    <div class="reload_bg" onclick="location.reload()">
+        <div class="reload">
+            <img src="{{url_for('static',filename='reload.png')}}" alt=""></img>               
+        </div>
+    </div>
+      </body>            
+</html>

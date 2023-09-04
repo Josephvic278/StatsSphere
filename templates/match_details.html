@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page title</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='home.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='match_details.css')}}">
+    <script src="{{url_for('static', filename='home.js')}}"></script>
+</head>
+<body>
+    <div class="top_nav">
+        <div class="nav_img">
+            <img src="{{url_for('static',filename='nav.png')}}" alt="" onclick="open_menu()"></img>
+        </div>
+        <div class="logo">
+            <img src="{{url_for('static',filename='logo.png')}}" alt=""></img>
+        </div>
+    </div> 
+
+<div class="match_details_bg">
+    <div class="det_box">
+    <div class="comp_con">
+        <div class="comp_logo">
+            <img src="{{data['competition']['emblem']}}" alt=""></img>
+        </div>
+        <div class="comp_name">
+            <p>{{data['competition']['name']}}</p>
+        </div> 
+        <div class="league_logo">
+            <div class="comp_logo">
+                <img src="{{data['area']['flag']}}" alt=""></img>
+            </div>
+        </div>       
+    </div>
+    
+    <div class="teams_comp">
+        <div class="teams">
+        <div class="home_team_logo">
+            <img src="{{data['homeTeam']['crest']}}" alt=""></img>
+            <div class="tla">
+                <p>{{data["homeTeam"]["tla"]}}</p>
+            </div>
+        </div>
+        {% if data['status'] == 'IN_PLAY' %}
+        <div class="home_score">
+            <p>{{data["score"]["fullTime"]["home"]}}</p>
+        </div>
+        {% endif %}
+        {% if data['status'] == 'PAUSED' %}
+        <div class="home_score">
+            <p>{{data["score"]["fullTime"]["home"]}}</p>
+        </div>
+        {% endif %}
+        {% if data['status'] == 'FINISHED' %}
+        <div class="home_score">
+            <p>{{data["score"]["fullTime"]["home"]}}</p>
+        </div>
+        {% endif %}
+        
+        <div class="vs">
+            <p>-</p>
+            {% if data['status'] == 'IN_PLAY' %}
+            <p style="color:red">Live</p>
+            {% endif %}
+            {% if data["status"] == "TIMED" %}
+                <p>Coming Soon</p>
+            {% endif %}
+            {% if data["status"] == "PAUSED" %}
+                <p>Half - Time</p>
+            {% endif %}
+            {% if data["status"] == "FINISHED" %}
+                <p>Full - Time</p>
+            {% endif %}
+        </div>
+        {% if data['status'] == 'IN_PLAY' %}
+        <div class="away_score">
+            <p>{{data["score"]["fullTime"]["away"]}}</p>
+        </div>
+        {% endif %}
+        {% if data['status'] == 'PAUSED' %}
+        <div class="away_score">
+            <p>{{data["score"]["fullTime"]["away"]}}</p>
+        </div>
+        {% endif %}
+        {% if data['status'] == 'FINISHED' %}
+        <div class="away_score">
+            <p>{{data["score"]["fullTime"]["away"]}}</p>
+        </div>
+        {% endif %}
+        <div class="away_team_logo">
+            <img src="{{data['awayTeam']['crest']}}" alt=""></img>
+            
+            <div class="tla">
+                <p>{{data["awayTeam"]["tla"]}}</p>
+            </div>
+            
+        </div>
+    </div>
+    
+    </div>
+    <div class="down_logo">
+        <img src="{{url_for('static',filename='logo1.png')}}" alt=""></img>                
+    </div>
+    
+    <div class="main_details">
+        <div class="det_con">
+       <div class="competition">
+           <img src="{{url_for('static', filename='comp.png')}}" alt=""></img>
+           <p>Competition - {{data["competition"]["name"]}}</p>
+       </div> 
+       </div>
+       
+       <div class="det_con">
+       <div class="competition">
+           <img src="{{url_for('static', filename='hometeam.png')}}" alt=""></img>
+           <p>Home Team - {{data["homeTeam"]["name"]}}</p>
+       </div> 
+       </div>
+    
+    <div class="det_con">
+       <div class="competition">
+           <img src="{{url_for('static', filename='awayteam.png')}}" alt=""></img>
+           <p>Away Team - {{data["awayTeam"]["name"]}}</p>
+       </div> 
+       </div>
+       
+    <div class="det_con">
+       <div class="competition">
+           <img src="{{url_for('static', filename='mday.png')}}" alt=""></img>
+           <p>Match Day - {{data["matchday"]}}</p>
+       </div> 
+       </div>    
+       
+       <div class="det_con">
+       <div class="competition">
+           <img src="{{url_for('static', filename='ref.png')}}" alt=""></img>
+           {% for get_ref in data["referees"] %}
+           <p>Referee - {{get_ref["name"]}}</p>
+           {% endfor %}
+       </div> 
+       </div>    
+        
+    </div>
+            
+    </div>               
+</div>       
+       
+    <div class="menu_bar" id="menu">
+       <div class="logo">
+            <img src="{{url_for('static',filename='logo1.png')}}" alt=""></img>
+            <div class="close_menu">
+                <button onclick="close_menu()">×</button>
+            </div>
+        </div> 
+        <div class="menu_items">
+            <div class="menu_links">
+                <ul>
+                <li><a href="{{url_for('home')}}">Home</a></li>
+                <li><a href="{{url_for('livescore')}}">Live Score</a></li>
+                <li><a href="">Video Highlights</a> </li>
+                <li><a href="{{url_for('newspage')}}">Football News</a></li>
+                <li><a href="">Predict Scores</a></li>
+                <li><a href="{{url_for('competitions')}}">Leage Tables</a></li>                
+                <li><a href="">Leagues</a></li>                
+                <li><a href="">Sign Up</a></li> 
+               <li><a href="">About Us</a></li> 
+                </ul>                
+            </div>
+        </div>
+        <div class="search">
+            <div class="search_con">
+                <input type="search" placeholder="Search">                                                              
+                <button>Search</button>                                                                              
+            </div>                          
+        </div>        
+    </div> 
+    
+    <footer>
+        <div class="footer">
+            <img src="{{url_for('static',filename='logo1.png')}}" alt=""></img>                                                           
+        </div>
+    </footer>   
+    <div class="reload_bg" onclick="location.reload()">
+        <div class="reload">
+            <img src="{{url_for('static',filename='reload.png')}}" alt=""></img>               
+        </div>
+    </div>
+</body>
+</html>

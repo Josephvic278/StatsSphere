@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page title</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='home.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='table.css')}}">
+    <script src="{{url_for('static', filename='home.js')}}"></script>
+</head>
+<body>
+    <div class="top_nav">
+        <div class="nav_img">
+            <img src="{{url_for('static',filename='nav.png')}}" alt="" onclick="open_menu()"></img>
+        </div>
+        <div class="logo">
+            <img src="{{url_for('static',filename='logo.png')}}" alt=""></img>
+        </div>
+    </div>
+    
+    {% set check_comp = data["competition"]["type"] %}
+    {% if check_comp == "LEAGUE" %}
+    <div class="box_con">
+        <div class="box">
+            <div class="top_header_box">
+                <div class="comp">
+                    {% set comp_name = data["competition"]["name"] %}
+                    {% set comp_logo = data["competition"]["emblem"] %}
+                    <div class="comp_name">
+                        <p><b class="b">|</b>{{comp_name}}</p>
+                    </div> 
+                    <div class="comp_logo">
+                        <img src="{{comp_logo}}" alt=""></img>
+                    </div>                                               
+                                       
+                </div>
+                <div class="first_pos">
+                    <div class="f_det">
+                    {% set f_list = [] %}
+                    {% set f_stands = data["standings"]%}
+                    {% for get_club in f_stands %}                    
+                    {% set first_pos = get_club["table"] %}                              
+                        {% for get_f in first_pos %}
+                            {% set f_pos = get_f["position"] %}        {% set f_name = get_f["team"]["name"] %}
+                            {% set f_logo = get_f["team"]["crest"] %}
+                            {% set _= f_list.append(get_f["won"]) %}
+                            {% set _= f_list.append(get_f["draw"]) %}
+                            {% set _= f_list.append(get_f["lost"]) %}
+                            {% if loop.index0 == 0 %}
+                            <div class="f_logo">
+                                <h3>{{f_name}}</h3>
+                                <img src="{{f_logo}}" alt=""></img>                                                               
+                            </div>                            
+                            {% endif %}
+                        {% endfor %}
+                        {% endfor %}
+                    </div>       
+                    
+                    <div class="f_stat">
+                       <div class="f_head">
+                       <div class="f_won">
+                          <p>W</p> 
+                       </div> 
+                       <div class="f_draw">
+                           <p>D</p>
+                       </div> 
+                       <div class="f_loss">
+                           <p>L</p>
+                       </div>          
+                       </div>
+                       
+                       <div class="f_data">
+                           <div class="f_win_data">
+                               <p>{{f_list[0]}}</p>
+                           </div>
+                           <div class="f_draw_data">
+                               <p>{{f_list[1]}}</p>
+                           </div>
+                           <div class="f_lost_data">
+                               <p>{{f_list[2]}}</p>
+                           </div>
+                       </div>                
+                    </div>
+                    </div>                                         
+            </div>
+            {% set stands = data["standings"]%}            
+            <div class="body_box">
+                {% for get_team in stands %}                
+                    {% set table = get_team["table"] %}
+                    {% for tb_data in table %}
+                    
+                       <div class="team_box">                           
+                           {% set team_pos = tb_data["position"] %}       
+                           {% set test = table|length %} 
+                           {% set test_list = [] %} 
+                           {% for get_last in table[-4:] %}
+                           {% set _= test_list.append(get_last["position"]) %}    
+                           {% endfor %}                                                                                     
+                           {% if team_pos < 5 %}                                                   
+                           <div class="team_pos" style="border-left:4px solid lightgreen;">    
+                               {% if loop.index0 == 0 %}
+                                   <p><b>pos</b></p> 
+                               {% endif %}                                                                         
+                                   <p>{{team_pos}}</p>                                                                  
+                           </div> 
+                           {% elif team_pos == 5 or team_pos == 6 %}
+                           <div class="team_pos" style="border-left:4px solid lightblue;">                                                                             
+                                   <p>{{team_pos}}</p>                                                                  
+                           </div>                                   
+                           
+                           {% elif team_pos in test_list %}                           
+                           <div class="team_pos" style="border-left:4px solid red;">                                                                             
+                                   <p>{{team_pos}}</p>                                                                  
+                           </div>                           
+                           {% else %}
+                           <div class="team_pos">                                               
+                                   <p>{{team_pos}}</p>                                                                  
+                           </div>                                                      
+                           {% endif %}                           
+                           <div class="team_logo">
+                               {% set team_logo = tb_data["team"]["crest"] %}
+                               {% if loop.index0 == 0 %}
+                               <p style="font-weight:100;margin:3px">.</p>                                   
+                               {% endif %}                                  
+                               <img src="{{team_logo}}" alt=""></img>
+                           </div>
+                           <div class="team_name">
+                               {% if loop.index0 == 0 %}
+                                   <p><b>TEAMS</b></p>
+                               {% endif %}
+                               {% set team_name = tb_data["team"]["shortName"] %}
+                               <p>{{team_name}}</p>
+                           </div> 
+                           
+                           <div class="stand_data">                                                                                
+                           <div class="win_data">
+                               {% if loop.index0 == 0 %}
+                                   <p><b>W</b></p>
+                               {% endif %}
+                              {% set win_data = tb_data["won"] %} 
+                              <p>{{win_data}}</p>
+                           </div>
+                           
+                           <div class="draw_data">
+                               {% if loop.index0 == 0 %}
+                                   <p><b>D</b></p>
+                               {% endif %}
+                           {% set draw_data = tb_data["draw"] %}
+                           <p>{{draw_data}}</p>
+                           </div> 
+                           
+                           <div class="lost_data">
+                               {% if loop.index0 == 0 %}
+                                   <p><b>L</b></p>
+                               {% endif %}
+                               {% set lost_data = tb_data["lost"] %}
+                               <p>{{lost_data}}</p>
+                           </div>
+                           
+                           <div class="lost_data">
+                               {% if loop.index0 == 0 %}
+                                   <p><b>GD</b></p>
+                               {% endif %}
+                               {% set gd_data = tb_data["goalDifference"] %}
+                               <p>{{lost_data}}</p>
+                           </div>
+                           
+                           <div class="lost_data">
+                               {% if loop.index0 == 0 %}
+                                   <p><b>GA</b></p>
+                               {% endif %}
+                               {% set lost_data = tb_data["goalsAgainst"] %}
+                               <p>{{lost_data}}</p>
+                           </div>
+                           
+                           <div class="pts_data">
+                               {% if loop.index0 == 0 %}
+                                   <p><b>PTS</b></p>
+                               {% endif %}
+                               {% set pts = tb_data["points"] %}
+                               <p>{{pts}}</p>
+                           </div>
+                       </div>
+                           
+                       </div>                                                          
+                    {% endfor %}                
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %} 
+    {% if check_comp == "CUP" %}
+        <div class="box_con">
+        <div class="box">
+            <div class="top_header_box">
+                <div class="comp">
+                    {% set comp_name = data["competition"]["name"] %}
+                    {% set comp_logo = data["competition"]["emblem"] %}
+                    <div class="comp_name">
+                        <p><b class="b">|</b>{{comp_name}}</p>
+                    </div> 
+                    <div class="comp_logo">
+                        <img src="{{comp_logo}}" alt=""></img>
+                    </div>                                               
+                                       
+                </div>
+               </div> 
+            {% set stands = data["standings"]%}            
+            <div class="body_box" style="">
+                {% for get_team in stands %}                
+                    {% set table = get_team["table"] %}
+                    {% for tb_data in table %}
+                    
+                       <div class="team_box">                           
+                           {% set team_pos = tb_data["position"] %}       
+                           {% set test = table|length %} 
+                           {% set test_list = [] %} 
+                           {% for get_last in table[-4:] %}
+                           {% set _= test_list.append(get_last["position"]) %}    
+                           {% endfor %}
+                           
+                           {% if team_pos < 3 %}                                                                                                                
+                           <div class="team_pos" style="border-left:3px solid lightgreen;">                                               
+                                   <p>{{team_pos}}</p>                                                                  
+                           </div>
+                           {% else %}
+                           <div class="team_pos">                                               
+                                   <p>{{team_pos}}</p>                                                                  
+                           </div>
+                           {% endif %}                                                                                                          
+                           <div class="team_logo">
+                               {% set team_logo = tb_data["team"]["crest"] %}
+                               {% if loop.index0 == 0 %}
+                               <p style="font-weight:100;margin:3px">.</p>                                   
+                               {% endif %}                                  
+                               <img src="{{team_logo}}" alt=""></img>
+                           </div>
+                           <div class="team_name">
+                               {% if loop.index0 == 0 %}
+                                   <p><b>TEAMS - {{get_team["group"][-1:]}}</b></p>
+                               {% endif %}
+                               {% set team_name = tb_data["team"]["shortName"] %}
+                               <p>{{team_name}}</p>
+                           </div> 
+                           
+                           <div class="stand_data">                                                                                
+                           <div class="win_data">
+                               {% if loop.index0 == 0 %}
+                                   <p><b>W</b></p>
+                               {% endif %}
+                              {% set win_data = tb_data["won"] %} 
+                              <p>{{win_data}}</p>
+                           </div>
+                           
+                           <div class="draw_data">
+                               {% if loop.index0 == 0 %}
+                                   <p><b>D</b></p>
+                               {% endif %}
+                           {% set draw_data = tb_data["draw"] %}
+                           <p>{{draw_data}}</p>
+                           </div> 
+                           
+                           <div class="lost_data">
+                               {% if loop.index0 == 0 %}
+                                   <p><b>L</b></p>
+                               {% endif %}
+                               {% set lost_data = tb_data["lost"] %}
+                               <p>{{lost_data}}</p>
+                           </div>
+                           
+                           <div class="lost_data">
+                               {% if loop.index0 == 0 %}
+                                   <p><b>GD</b></p>
+                               {% endif %}
+                               {% set gd_data = tb_data["goalDifference"] %}
+                               <p>{{lost_data}}</p>
+                           </div>
+                           
+                           <div class="lost_data">
+                               {% if loop.index0 == 0 %}
+                                   <p><b>GA</b></p>
+                               {% endif %}
+                               {% set lost_data = tb_data["goalsAgainst"] %}
+                               <p>{{lost_data}}</p>
+                           </div>
+                           
+                           <div class="pts_data">
+                               {% if loop.index0 == 0 %}
+                                   <p><b>PTS</b></p>
+                               {% endif %}
+                               {% set pts = tb_data["points"] %}
+                               <p>{{pts}}</p>
+                           </div>
+                       </div>
+                           
+                       </div>                                                          
+                    {% endfor %}                
+                {% endfor %}
+            </div>
+        </div>
+    </div> 
+    {% endif %}       
+  
+    <div class="menu_bar" id="menu">
+       <div class="logo">
+            <img src="{{url_for('static',filename='logo1.png')}}" alt=""></img>
+            <div class="close_menu">
+                <button onclick="close_menu()">×</button>
+            </div>
+        </div> 
+        <div class="menu_items">
+            <div class="menu_links">
+                <ul>
+                <li><a href="{{url_for('home')}}">Home</a></li>
+                <li><a href="{{url_for('livescore')}}">Live Score</a></li>
+                <li><a href="">Video Highlights</a> </li>
+                <li><a href="{{url_for('newspage')}}">Football News</a></li>
+                <li><a href="">Predict Scores</a></li>
+                <li><a href="{{url_for('competitions')}}">Leage Tables</a></li>                
+                <li><a href="">Leagues</a></li>                
+                <li><a href="">Sign Up</a></li> 
+               <li><a href="">About Us</a></li> 
+                </ul>                
+            </div>
+        </div>
+        <div class="search">
+            <div class="search_con">
+                <input type="search" placeholder="Search">                                                              
+                <button>Search</button>                                                                              
+            </div>                          
+        </div>        
+    </div> 
+    
+    <footer>
+        <div class="footer">
+            <img src="{{url_for('static',filename='logo1.png')}}" alt=""></img>                                                           
+        </div>
+    </footer>   
+    <div class="reload_bg" onclick="location.reload()">
+        <div class="reload">
+            <img src="{{url_for('static',filename='reload.png')}}" alt=""></img>               
+        </div>
+    </div>
+</body>
+</html>

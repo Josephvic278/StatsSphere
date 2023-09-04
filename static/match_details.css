@@ -1,0 +1,121 @@
+.match_details_bg{
+    justify-content: center;
+    display: flex;
+    align-items: center;  
+    width: 100%; 
+}
+.det_box{
+    width: 95%;
+    background: white;
+    border-radius: 20px;
+}
+.match_details{
+    
+}
+.comp_con{
+    display: flex;
+    margin: 10px;
+}
+.comp_logo img{
+    width: 30px;
+}
+.comp_name{
+    width: 100%;
+}
+.comp_name p{
+    font-family: futura;
+    font-size: 14px;
+    color: black;
+    margin-left: 5px;
+    margin-top: 7px;
+    font-weight: bold;    
+}
+.league_logo{
+    width: 100%;
+}
+.league_logo .comp_logo{
+    float: right;
+    margin: 8px;
+}
+.teams_comp{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.teams{
+    display: flex;
+    width: 95%;
+    justify-content: space-between;
+}
+.home_team_logo{
+    
+}
+.vs{
+    margin-top: 40px;
+    text-align: center;
+}
+.vs p{
+    font-family: futura;
+    font-weight: bold;
+    color: black;
+}
+.tla p{
+    font-family: futura;
+    font-weight: bold;
+    color: black;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+}
+.home_score, .away_score{
+    margin-top: 30px;
+}
+.home_score, .away_score p{
+    font-family: futura;
+    font-weight: bold;
+    color: black;
+    font-size: 30px;
+}
+.home_team_logo, .away_team_logo p{
+    font-family: futura;
+    font-weight: bold;
+    color: black;    
+}
+.home_team_logo img{
+    width: 120px;
+}
+.away_team_logo{
+    
+}
+.away_team_logo img{
+    width: 120px;
+}
+.down_logo{
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.down_logo img{
+    width: 70px;
+}
+.main_details{
+    
+}
+.det_con{
+    background: #eff2f6;    
+}
+.competition{
+    display: flex;
+    margin: 10px;
+}
+.competition img{
+    width: 20px;
+}
+.competition p{
+    font-family: futura;
+    font-weight: 500;
+    color: #003366;        
+    margin-left: 5px;
+}
