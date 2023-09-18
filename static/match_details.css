@@ -1,121 +1,49 @@
-.match_details_bg{
-    justify-content: center;
-    display: flex;
-    align-items: center;  
-    width: 100%; 
+.details_bg{
+  margin-top: 20px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
 }
-.det_box{
-    width: 95%;
-    background: white;
-    border-radius: 20px;
+.details_box{
+  background: #2E3440;
+  border-radius: 15px;
+  width: 95%;
 }
-.match_details{
-    
+.details{
+  margin: 5px;
 }
-.comp_con{
-    display: flex;
-    margin: 10px;
-}
-.comp_logo img{
-    width: 30px;
-}
-.comp_name{
-    width: 100%;
-}
-.comp_name p{
-    font-family: futura;
-    font-size: 14px;
-    color: black;
-    margin-left: 5px;
-    margin-top: 7px;
-    font-weight: bold;    
-}
-.league_logo{
-    width: 100%;
-}
-.league_logo .comp_logo{
-    float: right;
-    margin: 8px;
-}
-.teams_comp{
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    width: 100%;
+.match_info{
+  margin-top: 15px;
 }
 .teams{
-    display: flex;
-    width: 95%;
-    justify-content: space-between;
 }
-.home_team_logo{
-    
+.team_logos{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
-.vs{
-    margin-top: 40px;
-    text-align: center;
+.team_logos img{
+  width: 70px;
+  margin: 10px;
 }
-.vs p{
-    font-family: futura;
-    font-weight: bold;
-    color: black;
+.home_logo p, .away_logo p{
+  text-align: center;
+  font-weight: bold;
+  font-family: Calibri;
+  font-size: 12px;
+  color: white;border-bo
 }
-.tla p{
-    font-family: futura;
-    font-weight: bold;
-    color: black;
-    font-size: 18px;
-    text-align: center;
-    margin-top: 10px;
+.status{
+  margin-top: 45px;
 }
-.home_score, .away_score{
-    margin-top: 30px;
+.status p{
+  font-family: Prometo;
+  font-weight: 400;
+  text-align: center;
+  font-size: 15px;
 }
-.home_score, .away_score p{
-    font-family: futura;
-    font-weight: bold;
-    color: black;
-    font-size: 30px;
-}
-.home_team_logo, .away_team_logo p{
-    font-family: futura;
-    font-weight: bold;
-    color: black;    
-}
-.home_team_logo img{
-    width: 120px;
-}
-.away_team_logo{
-    
-}
-.away_team_logo img{
-    width: 120px;
-}
-.down_logo{
-    width: 100%;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-}
-.down_logo img{
-    width: 70px;
-}
-.main_details{
-    
-}
-.det_con{
-    background: #eff2f6;    
-}
-.competition{
-    display: flex;
-    margin: 10px;
-}
-.competition img{
-    width: 20px;
-}
-.competition p{
-    font-family: futura;
-    font-weight: 500;
-    color: #003366;        
-    margin-left: 5px;
+.team_names{
+  display: flex;
+  justify-content: space-between;
+  width: 100%; 
 }

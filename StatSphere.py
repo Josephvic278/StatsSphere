@@ -13,43 +13,32 @@ socketio = SocketIO(app)
 app.config["SECRET_KEY"] = "animation197i"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///news.db"
 
-football_data_api_key = "a75fb6a4a6f648b6a406b77982c61f7c"
+football_data_api_key = "1964b441b0df4396bb65ea0bf824ad12"
 football_data_api_key1 = "b6e238f79009406a8aa66496887dd495"
 football_data_url = "https://api.football-data.org/v4/{}/"
 football_data_header =  {"X-Auth-Token":football_data_api_key}
-news_api_header = {
-    "X-Api-Key": "ad4f429ab6dd4fd6b5dd137fcbb6f42a",  
+news_api_param = {
+    "apikey":"pub_28802732a363123dc636e70651fa9df286e10",
+    "q":"football",
+    "language":"en"
 }
 
-current_date = datetime.now()
-three_days_ago = current_date - timedelta(days=2)
-get_tdate = three_days_ago.strftime("%Y-%m-%d")
-
-get_today = date.today()
-
-football_keywords = ("soccer", "Premier League", "La Liga", "Bundesliga", "Serie A", "Champions League", "World Cup", "UEFA", "FIFA", "goal", "match", "score", "team", "player", "transfer", "manager", "tournament", "penalty", "injury", "referee", "stadium", "fan", "club")
-
-newsapi_param = {
-    "q":football_keywords,
-    "language":"en",
-    "sortBy":"relevancy",
-    "from":get_tdate,
-    "to":get_today
-}
-news_api_url = "https://newsapi.org/v2/everything"
+news_api_url = "https://newsdata.io/api/1/news"
 db = SQLAlchemy(app)
 
 class News(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    source = db.Column(db.String, nullable = False)
-    author = db.Column(db.String, nullable = True)
-    title = db.Column(db.String, nullable = False)
-    url = db.Column(db.String, nullable=False)
-    urlToImage = db.Column(db.String , nullable = False)
-    publishedAt = db.Column(db.String, nullable = False)
-    content = db.Column(db.String, nullable = False)
+    source_id = db.Column(db.String, nullable = True)
+    creator = db.Column(db.String, nullable = True)
+    title = db.Column(db.String, nullable = True)
+    category =db.Column(db.String, nullable=True)
+    link = db.Column(db.String, nullable=True)
+    video_url = db.Column(db.String)
+    image_url = db.Column(db.String , nullable = True)
+    publishDate = db.Column(db.String, nullable = True)
+    description = db.Column(db.String, nullable = True)
 
-app.app_context().push()
+app.app_context().push()   
 db.create_all()
 
 @app.route("/", methods = ["POST","GET"])
@@ -60,6 +49,8 @@ def home():
     date_list = []
     time_list = []
     
+    comp_names = []    
+    
     for get_date in data:
         date_string = get_date["utcDate"]
         date_format = "%Y-%m-%dT%H:%M:%SZ"
@@ -69,15 +60,19 @@ def home():
         
         date_list.append(day_of_week)
         time_list.append(date_string[11:16])
-    print(time_list)
     
     if request.method == "POST":
         data = ast.literal_eval(request.form["data"])
-        print(data)
         session["data"] = data
         return redirect("match_details")
     else:
-        return render_template("home.html", data = data, dates = date_list,time_list = time_list)
+        for get_comp in data:
+            if [get_comp["competition"]["name"],get_comp["area"]["flag"],get_comp["area"]["name"]]  not in comp_names:
+                comp_names.append([get_comp["competition"]["name"],get_comp["area"]["flag"],get_comp["area"]["name"]])
+            else:
+                continue
+            
+        return render_template("home.html", data = data, dates = date_list,time_list = time_list, comp_names = comp_names)
 
 @app.route("/match_details")   
 def match_details():
@@ -93,13 +88,11 @@ def competitions():
           
           data = response.json()
           session["tabledata"] = data
-          print(comp_id)
           return redirect("/leaguetable")
           
       else:
           response = requests.get(football_data_url.format("competitions"), headers = football_data_header)
           data = response.json()["competitions"]
-          print(data)
           return render_template("competitions.html",data = data)
 
 @app.route("/leaguetable")
@@ -154,38 +147,61 @@ def live_update():
         
         data = update_data
         socketio.emit('get_update',data)
+        print(data)
         time.sleep(10)
 
 def publish_news():
-    response=requests.get(news_api_url, headers = news_api_header, params = newsapi_param)
-    data = response.json()["articles"]
-    app.app_context().push()
-    get_content = db.session.query(News).all()
-    content_list = []
-    for check_con in get_content:
-        content_list.append(check_con.content)
+    response=requests.get(url=news_api_url, params = news_api_param)
+    data = response.json()["results"]
     
-    for get_article_data in data:
-        source = get_article_data["source"]["name"]
-        author = get_article_data["author"]
-        title = get_article_data["title"]
-        url = get_article_data["url"]
-        urlToImage = get_article_data["urlToImage"]
-        publishedAt = get_article_data["publishedAt"]
-        content = get_article_data["content"]
+    app.app_context().push()
+    get_description = db.session.query(News).all()
+    
+    check_des_list = []
+    for check_des in get_description:
+        check_des_list.append(check_des.description)
+    
+    for get_news in data:
+        title = get_news["title"]
+        link = get_news["link"]
+        video_url = get_news["video_url"]
+        description = get_news["description"] 
+        pubDate = get_news["pubDate"]
+        image_url = get_news["image_url"]
+        source_id = get_news["source_id"]
+        category = get_news["category"][0]
+        creator = str(get_news["creator"])
         
-        if content not in content_list and author != None and urlToImage!=None and source != None and title  != None and content != None and url != None and publishedAt != None:
+        if title == None:
+            title = "no title"
+        if link == None:
+            link = "link not available"
+        if video_url == None:
+            video_url = "No video"
+        if get_news["creator"] == None:
+            creator = "No creator"
+        if description == None:
+            description = "No description"
+        if image_url == None:
+            image_url = "No image"
+        if source_id == None:
+            source_id = "No source"
+        if get_news["category"] == None:
+            category = "No category"
+        
+        if description not in check_des_list:
+            new_news = News(title=title, link=link, video_url = video_url, description=description, publishDate=pubDate, image_url=image_url, source_id = source_id, category=category, creator=creator)
             
-            new_news_set = News(source=source, author=author, title=title, url=url, urlToImage=urlToImage, publishedAt=publishedAt, content=content)
-            db.session.add(new_news_set)
+            db.session.add(new_news)
             db.session.commit()
     
 def news():
-    publish_news()
-    while True:
-        now = datetime.now()
-        if now.hour == 5 and now.minute == 5 and now.second == 0:
-            publish_news()        
+    while True:        
+        now = datetime.now()        
+        if now.hour == 5 and now.minute == 0 and now.second == 0:
+            publish_news()    
+            time.sleep(5)    
+            print("news updated successfully!!!")
 
 def get_user_input():
     while True:        
@@ -193,16 +209,23 @@ def get_user_input():
         if user_input=="news":
             news()                                                                       
 
+def update_db():
+    while True:
+        news_data = db.session.query(News).all()
+        return news_data
+        time.sleep(10)
+
 @app.route("/newpage", methods=["POST","GET"])
 def newspage():
+    news_data = db.session.query(News).all()
     
     if request.method == "POST":
         print("ok")
-    else:
-        news_data = db.session.query(News).all()
+    else:        
         return render_template("newspage.html", news_data = news_data)
+        
 if __name__ == '__main__':
-    threading.Thread(target=live_update).start()
     threading.Thread(target=news).start()
+    threading.Thread(target=live_update).start()  
     #threading.Thread(target=get_user_input).start()
     socketio.run(app, debug=True)

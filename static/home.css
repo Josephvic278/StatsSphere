@@ -3,250 +3,138 @@
     padding: 0;
     box-sizing: border-box;
 }
-body {
-    background: #eff2f6;
+body{
+  background: #1A1A1A;
 }
-.top_nav{
-    background: none;
-    display: flex;
-    margin: ;
+.header{
+  height: 7.5ex;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #2E3440;
+}
+.header_logo{
+    margin: 0;
+    margin-left: 10px;
     justify-content: space-between;
 }
-.logo{
-    margin-right: 30px;
-    margin-top: 30px;
+.menu_icon_bg{
+  top: 0;
+  position: absolute;
+  right: 0;
 }
-.logo img{
-    width: 20ex;
+.menu_icon{
+  border-radius: 10px;
 }
-.top_nav .nav_img img{
-    margin-left: 30px;
-    margin-top: 20px;
-    width: 40px;
+.menu_icon img{
+  width: 50px;
+  margin: 7px;
 }
-.box_container{
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    margin-top: -10px;
+.header_logo img{
+  width: 180px;
+  margin-top: 5px;
 }
-.match_con{
-    width: 90%;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    background: white;
-    border-radius: 20px;
-    margin-top: 25px;
+.data_board{
+  margin-top: 25px;
+  font-family: prometo;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-content: center;
 }
-.match_content{
-    margin: 15px;
-    width: 100%;    
+.title{
+  display: flex;
+  width: 100%;
+  margin-top: 5px;
+  justify-content: center;
+  align-content: center;
+  margin-bottom: -15px;
 }
-.comp{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+.title img{
+  width: 200px;
+}
+.data_con{
+  background: #2E3440;
+  width: 96%;
+  border-radius: 20px;
+}
+.data_content{
+  margin: 10px;
+}
+.comp_name{
+  margin-left: 10px;
+}
+.comp_name p{
+  font-family: Prometo;
+  color: white;
+  font-weight: bold;
+  margin-top: 5px;
+}
+.comp_details{
+  width: 100%;
+  display: flex;
+  margin-top: 20px;
+}
+.country_logo img{
+  border-radius: 100%;
+  width: 25px;
+  object-fit: cover;
+  height: 25px;
+}
+.matches{
+  margin: 10px;
+}
+.matches_con{
+  margin-left: 20px;
+  background: #1A1A1A;
+  margin-top: 15px;
+  border-radius: 10px;
+}
+.teams p{
+  font-family: Prometo;
+  font-size: 13px;
+}
+.hometeam{
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.home_score {
+  margin-right: 15px;
+}
+.home_score p{
+  text-align: right;
+  font-weight: bold;
+}
+.hometeam img{
+  width: 35px;
+  margin-top: 8px;
+}
+.hometeam p{
+  margin-left: 7px;
+  font-weight: bold;
+  color: white;
+  width: 100%;
+}
+.awayteam{
+  display: flex;
+  align-items: center;
+}
+.awayteam p{
+  margin-left: 7px;
+  font-weight: bold;
+  font-size: 13px;
+  color: white;
+  width: 100%;
+}
+.awayteam img{
+  width: 35px;
+  margin-top: 8px;
 }
 .status{
-    text-align: center;
-    font-family: futura;
-    margin-left: 105px;
-    font-size: 14px;
-    font-weight: bold;
-    margin: 3px;
-    color: red;
+  
 }
-.comp img{
-    width: 25px;
-}
-.comp_det{
-    display: flex;
-}
-.comp p{
-    font-family: futura;
-    margin-left: 105px;
-    font-size: 14px;
-    font-weight: bold;
-    margin: 3px;
-}
-.teams{
-    display: flex;    
-    margin-top: 20px;
-    justify-content: space-between;
-}
-.homeTeam{
-    
-}
-.homeTeam p{
-    text-align: center;
-    font-family: futura;
-    margin-left: 105px;
-    font-size: 18px;
-    font-weight: bold;
-    margin: 3px;
-}
-.homeTeam .crest img{
-    width: 110px;
-    height: auto;
-}
-.awayTeam{
-    
-}
-.awayTeam p{
-    text-align: center;
-    font-family: futura;
-    margin-left: 105px;
-    font-size: 18px;
-    font-weight: bold;
-    margin: 3px;
-}
-.awayTeam .crest img{
-    width: 110px;
-    height: auto;
-}
-.detail_btn{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-    margin-bottom: 10px;
-}
-.detail_btn button{
-    width: 90%;
-    height: 40px;
-    border: none;
-    color: white;
-    font-family: futura;    
-    background: #003366;
-    font-size: 14px;
-    font-weight: 400;    
-    border-radius: 6px;
-}
-.detail_btn form{
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-}
-.date{
-    margin-top: 60px;
-    text-align: center;
-}
-.date p{
-    font-family: futura;
-    margin-left: 105px;
-    font-size: 14px;
-    font-weight: bold;
-    margin: 3px;
-}
-.menu_bar{
-    width: 100%;
-    height: 100%;
-    background: white;
-    position: fixed;
-    top: 0;
-    margin-left: -100%;
-    transition: 0.9s;
-}
-.menu_bar .logo{
-    margin-left: 10px;
-    margin-top: 30px;
-    display: flex;
-    justify-content: space-between;
-    width: 90%;    
-}
-.menu_bar .logo img{
-    width: 20ex;    
-}
-.menu_items{
-    display: flex;
-    margin-left: 10px;
-}
-.menu_items a{
-    text-decoration: none;
-    font-family: futura;
-    font-weight: 500;
-    font-size: 16px;
-    color: #003366;
-}
-.menu_items li{
-    margin-top: 22px;
-    list-style: none;
-    margin-left: 10px;
-}
-.search{
-    width: 100%;
-    margin-top: 20px;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-}
-.search_con{
-    width: 90%;
-}
-.search_con input{
-    height: 38px;
-    width: 100%;
-    background: #E0F5FF;
-    text-indent: 5px;
-    outline: none;
-    border-radius: 5px;
-    border: none;
-}
-.search button{
-    width: 100%;
-    height: 40px;
-    border: none;
-    color: white;
-    font-family: futura;    
-    background: #003366;
-    font-size: 14px;
-    font-weight: 400;    
-    border-radius: 6px;
-    margin-top: 8px;
-}
-.close_menu button{
-    background: #003366;
-    width: 30px;
-    border: none;
-    color: white;
-    font-weight: bold;
-    height: 30px;
-    border-radius: 10px;
-}
-.footer{
-    justify-content: center;
-    display: flex;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    align-items: center;
-}
-.footer img{
-    width: 300px;
-}
-.footer p{
-    text-decoration: none;
-    font-family: futura;
-    font-weight: 500;
-    font-size: 16px;
-    color: #003366;
-}
-.reload_bg{
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-}
-.reload{
-    background: #003366;
-    height: 50px;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    width: 50px;
-    border-radius: 100%;
-}
-.reload img{
-    width: 40px;
+.status p{
+  font-weight: bold;
+  font-size: 12px;
 }

@@ -1,35 +1,28 @@
-.main_bg{
-    justify-content: center;
-    display: flex;
-    align-items: center;
+.main_body{
+    display: grid;
+    place-items: center;
     width: 100%;
-}
-body{
-    font-family: futura;
-    font-weight: 500;
-}
-.news_bg{
-    width: 95%;
-    background: white;
-    border-radius: 10px;
-}
-.news_box{
-    width: 95%;
-    margin-top: 20px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    margin-bottom: 20px;
 }
 .news{
     width: 90%;
-    display: flex;
+    margin-top: 20px;    
 }
-.news_img img{
-    width: 100px;
+.news_bg{
+    background: white;
     border-radius: 10px;
 }
-.news_title{
-    margin-left: 10px;
+.news_bg img{
     width: 100%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.news_title{
+    margin-top: 0;
+    width: 95%;    
+}
+.news_title p{
+    font-weight: 500;
+    
+    margin-bottom: 5px;
+    font-family: futura;
 }
